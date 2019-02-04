@@ -8,7 +8,13 @@ import android.text.Spanned
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 
-class SpankBuilder(val context: Context, val content: SpannableStringBuilder) {
+/**
+ * Intermediate construct used by [styleString] to reduce the scope of the auto-complete
+ */
+class SpankBuilder(
+    val context: Context,
+    val content: SpannableStringBuilder
+) {
     val paragraphs: List<Paragraph> by lazy {
         content.toParagraphs()
     }
@@ -18,16 +24,30 @@ class SpankBuilder(val context: Context, val content: SpannableStringBuilder) {
     }
 }
 
-inline fun Context.styleString(content: String, block: SpankBuilder.() -> Unit): Spanned {
+/**
+ * Creates a [Spanned] version of the [content] with all styles inside [block]
+ */
+inline fun Context.styleString(
+    content: String,
+    block: SpankBuilder.() -> Unit
+): Spanned {
     val spannableBuilder = SpannableStringBuilder(content)
     val builder = SpankBuilder(this, spannableBuilder)
     builder.block()
     return builder.build()
 }
 
-inline fun Context.styleString(@StringRes resId: Int, block: SpankBuilder.() -> Unit) =
-    styleString(getString(resId), block)
+/**
+ * Creates a [Spanned] version of the value of the [resId] with all styles inside [block]
+ */
+inline fun Context.styleString(
+    @StringRes resId: Int,
+    block: SpankBuilder.() -> Unit
+) = styleString(getString(resId), block)
 
+/**
+ * Applies the styles on [block] to the specified range([start], [end]) inclusive in both sides
+ */
 inline fun SpankBuilder.range(
     @IntRange(from = 0) start: Int,
     @IntRange(from = 1) end: Int,
@@ -35,12 +55,17 @@ inline fun SpankBuilder.range(
     block: SpankSection.() -> Unit
 ) {
     if ((start >= content.length) or (end < start) or (end >= content.length)) {
-        throw IllegalStateException("the range($start, $end) is outside the boundaries of the content (0, ${content.length})")
+        throw IllegalStateException(
+            "Range($start, $end) is outside the boundaries of the content (0, ${content.length})"
+        )
     }
 
     SpankSection(content, start, end, spanFlag).block()
 }
 
+/**
+ * Applies the styles on [block] to the whole content
+ */
 inline fun SpankBuilder.all(
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankParagraph.() -> Unit
@@ -49,6 +74,10 @@ inline fun SpankBuilder.all(
     SpankParagraph(content, paragraph, spanFlag).block()
 }
 
+/**
+ * Applies the styles on [block] to the first appearance of the [excerpt] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.firstAppearanceOf(
     excerpt: String,
     ignoreCase: Boolean = false,
@@ -64,16 +93,21 @@ inline fun SpankBuilder.firstAppearanceOf(
     SpankSection(content, start, end, spanFlag).block()
 }
 
+/**
+ * Applies the styles on [block] to the first appearance of the value of the [resId] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.firstAppearanceOf(
     @StringRes resId: Int,
     ignoreCase: Boolean = false,
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankSection.() -> Unit
-) {
-    val excerpt = context.getString(resId)
-    firstAppearanceOf(excerpt, ignoreCase, spanFlag, block)
-}
+) = firstAppearanceOf(context.getString(resId), ignoreCase, spanFlag, block)
 
+/**
+ * Applies the styles on [block] to the last appearance of the [excerpt] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.lastAppearanceOf(
     excerpt: String,
     ignoreCase: Boolean = false,
@@ -89,16 +123,21 @@ inline fun SpankBuilder.lastAppearanceOf(
     SpankSection(content, start, end, spanFlag).block()
 }
 
+/**
+ * Applies the styles on [block] to the last appearance of the value of the [resId] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.lastAppearanceOf(
     @StringRes resId: Int,
     ignoreCase: Boolean = false,
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankSection.() -> Unit
-) {
-    val excerpt = context.getString(resId)
-    lastAppearanceOf(excerpt, ignoreCase, spanFlag, block)
-}
+) = lastAppearanceOf(context.getString(resId), ignoreCase, spanFlag, block)
 
+/**
+ * Applies the styles on [block] to all appearances of the [excerpt] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.allAppearanceOf(
     excerpt: String,
     ignoreCase: Boolean = false,
@@ -116,16 +155,21 @@ inline fun SpankBuilder.allAppearanceOf(
     } while (nextAppearance != NOT_FOUND)
 }
 
+/**
+ * Applies the styles on [block] to all appearances of the value of the [resId] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.allAppearanceOf(
     @StringRes resId: Int,
     ignoreCase: Boolean = false,
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankSection.() -> Unit
-) {
-    val excerpt = context.getString(resId)
-    allAppearanceOf(excerpt, ignoreCase, spanFlag, block)
-}
+) = allAppearanceOf(context.getString(resId), ignoreCase, spanFlag, block)
 
+/**
+ * Applies the styles on [block] to the [indexes] appearances of the [excerpt] in the content,
+ * if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.nThAppearanceOf(
     excerpt: String,
     indexes: List<Int>,
@@ -146,17 +190,21 @@ inline fun SpankBuilder.nThAppearanceOf(
     } while (start != NOT_FOUND)
 }
 
+/**
+ * Applies the styles on [block] to the [indexes] appearances of the value of the [resId] in the
+ * content, if it should match even if casing is different, then use [ignoreCase] = true
+ */
 inline fun SpankBuilder.nThAppearanceOf(
     @StringRes resId: Int,
     indexes: List<Int>,
     ignoreCase: Boolean = false,
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankSection.() -> Unit
-) {
-    val excerpt = context.getString(resId)
-    nThAppearanceOf(excerpt, indexes, ignoreCase, spanFlag, block)
-}
+) = nThAppearanceOf(context.getString(resId), indexes, ignoreCase, spanFlag, block)
 
+/**
+ * Applies the styles on [block] to the first paragraph of the content
+ */
 inline fun SpankBuilder.firstParagraph(
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankParagraph.() -> Unit
@@ -166,6 +214,9 @@ inline fun SpankBuilder.firstParagraph(
     SpankParagraph(content, paragraph, spanFlag).block()
 }
 
+/**
+ * Applies the styles on [block] to the last paragraph of the content
+ */
 inline fun SpankBuilder.lastParagraph(
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankParagraph.() -> Unit
@@ -175,27 +226,32 @@ inline fun SpankBuilder.lastParagraph(
     SpankParagraph(content, paragraph, spanFlag).block()
 }
 
-inline fun SpankBuilder.nThParagraph(
-    index: Int,
-    @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
-    block: SpankParagraph.() -> Unit
-) {
-    nThParagraph(listOf(index), spanFlag, block)
-}
-
+/**
+ * Applies the styles on [block] to the [indexes] paragraphs of the content
+ */
 inline fun SpankBuilder.nThParagraph(
     indexes: List<Int>,
     @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
     block: SpankParagraph.() -> Unit
-) {
-    indexes.forEach {
-        if ((it < 0) or (it >= paragraphs.size)) {
-            throw IllegalStateException("One or more indexes passed are invalid $indexes, indexes are zero based (0-${paragraphs.size - 1})")
-        }
-        SpankParagraph(content, paragraphs[it], spanFlag).block()
+) = indexes.forEach {
+    if ((it < 0) or (it >= paragraphs.size)) {
+        throw IllegalStateException("One or more indexes passed are invalid $indexes, indexes are zero based (0-${paragraphs.size - 1})")
     }
+    SpankParagraph(content, paragraphs[it], spanFlag).block()
 }
 
+/**
+ * Applies the styles on [block] to the [index] paragraph of the content
+ */
+inline fun SpankBuilder.nThParagraph(
+    index: Int,
+    @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
+    block: SpankParagraph.() -> Unit
+) = nThParagraph(listOf(index), spanFlag, block)
+
+/**
+ * Applies the styles on [block] to the paragraphs [start] to [end] of the content both inclusive
+ */
 inline fun SpankBuilder.paragraphRange(
     @IntRange(from = 0) start: Int,
     @IntRange(from = 0) end: Int,

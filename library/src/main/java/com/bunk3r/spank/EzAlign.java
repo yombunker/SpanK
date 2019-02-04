@@ -9,6 +9,9 @@ import static com.bunk3r.spank.EzAlign.CENTER;
 import static com.bunk3r.spank.EzAlign.END;
 import static com.bunk3r.spank.EzAlign.START;
 
+/**
+ * supported values for aligning spans
+ */
 @Retention(RetentionPolicy.SOURCE)
 @IntDef(value = {START, CENTER, END})
 public @interface EzAlign {

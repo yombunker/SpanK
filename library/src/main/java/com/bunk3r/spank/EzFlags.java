@@ -13,6 +13,9 @@ import static com.bunk3r.spank.EzFlags.INCLUSIVE_EXCLUSIVE;
 import static com.bunk3r.spank.EzFlags.INCLUSIVE_INCLUSIVE;
 
 
+/**
+ * Supported span flags to be used with when adding styles with {@link SpanK}
+ */
 @Retention(RetentionPolicy.SOURCE)
 @IntDef(
         value = {INCLUSIVE_INCLUSIVE,

@@ -11,6 +11,9 @@ import static com.bunk3r.spank.EzFontFamily.SANS_SERIF_LIGHT;
 import static com.bunk3r.spank.EzFontFamily.SERIF;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+/**
+ * Subset of supported font families
+ */
 @Retention(SOURCE)
 @StringDef(value = {MONOSPACE,
         SERIF,

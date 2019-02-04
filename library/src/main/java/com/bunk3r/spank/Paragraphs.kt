@@ -5,11 +5,17 @@ import androidx.annotation.IntRange
 
 const val NOT_FOUND = -1
 
+/**
+ * intermediate construct to represent the range of a paragraph, this is used by [styleString]
+ */
 data class Paragraph(
     @IntRange(from = 0) val startIndex: Int,
     @IntRange(from = 0) val endIndex: Int
 )
 
+/**
+ * splits the [Spannable] into paragraphs and returns a [List] containing them
+ */
 fun Spannable.toParagraphs(): List<Paragraph> {
     val paragraphs: MutableList<Paragraph> = mutableListOf()
     var startPosition = 0

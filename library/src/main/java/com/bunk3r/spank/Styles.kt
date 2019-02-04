@@ -17,6 +17,9 @@ import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 import java.util.*
 
+/**
+ * intermediate construct used by [styleString] to restrict the auto-complete
+ */
 open class SpankSection(
     val content: Spannable,
     val start: Int,
@@ -24,12 +27,18 @@ open class SpankSection(
     @EzFlags val spanFlag: Int
 )
 
+/**
+ * intermediate construct used by [styleString] to restrict the auto-complete
+ */
 class SpankParagraph(
     content: Spannable,
     paragraph: Paragraph,
     @EzFlags spanFlag: Int
 ) : SpankSection(content, paragraph.startIndex, paragraph.endIndex, spanFlag)
 
+/**
+ * applies a BOLD style to the specified [SpankSection]
+ */
 fun SpankSection.bold() {
     applySpan(
         StyleSpan(
@@ -38,6 +47,9 @@ fun SpankSection.bold() {
     )
 }
 
+/**
+ * applies a ITALIC style to the specified [SpankSection]
+ */
 fun SpankSection.italic() {
     applySpan(
         StyleSpan(
@@ -46,46 +58,67 @@ fun SpankSection.italic() {
     )
 }
 
+/**
+ * applies an UNDERLINE style to the specified [SpankSection]
+ */
 fun SpankSection.underline() {
     applySpan(
         UnderlineSpan()
     )
 }
 
+/**
+ * applies a STRIKE THROUGH style to the specified [SpankSection]
+ */
 fun SpankSection.strikethrough() {
     applySpan(
         StrikethroughSpan()
     )
 }
 
+/**
+ * applies a SUBSCRIPT style to the specified [SpankSection]
+ */
 fun SpankSection.subscript() {
     applySpan(
         SubscriptSpan()
     )
 }
 
+/**
+ * applies a SUPERSCRIPT style to the specified [SpankSection]
+ */
 fun SpankSection.superscript() {
     applySpan(
         SuperscriptSpan()
     )
 }
 
-fun SpankSection.foregroundColor(@ColorInt foregroundColor: Int) {
+/**
+ * applies a [color] FOREGROUND style to the specified [SpankSection]
+ */
+fun SpankSection.foregroundColor(@ColorInt color: Int) {
     applySpan(
         ForegroundColorSpan(
-            foregroundColor
+            color
         )
     )
 }
 
-fun SpankSection.backgroundColor(@ColorInt backgroundColor: Int) {
+/**
+ * applies a [color] BACKGROUND style to the specified [SpankSection]
+ */
+fun SpankSection.backgroundColor(@ColorInt color: Int) {
     applySpan(
         BackgroundColorSpan(
-            backgroundColor
+            color
         )
     )
 }
 
+/**
+ * applies a LINK style to the specified [SpankSection] which points to [url] and is clickable
+ */
 fun SpankSection.link(url: String) {
     applySpan(
         URLSpan(
@@ -94,6 +127,9 @@ fun SpankSection.link(url: String) {
     )
 }
 
+/**
+ * applies the [fontFamily] FONT style to the specified [SpankSection]
+ */
 fun SpankSection.font(@EzFontFamily fontFamily: String) {
     applySpan(
         TypefaceSpan(
@@ -102,6 +138,9 @@ fun SpankSection.font(@EzFontFamily fontFamily: String) {
     )
 }
 
+/**
+ * applies all the styles in [appearanceRes] to the specified [SpankSection]
+ */
 fun SpankSection.appearance(context: Context, appearanceRes: Int) {
     applySpan(
         TextAppearanceSpan(
@@ -110,6 +149,9 @@ fun SpankSection.appearance(context: Context, appearanceRes: Int) {
     )
 }
 
+/**
+ * changes the LOCALE on the specified [SpankSection]
+ */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 fun SpankSection.locale(locale: Locale) {
     applySpan(
@@ -119,6 +161,9 @@ fun SpankSection.locale(locale: Locale) {
     )
 }
 
+/**
+ * applies a SCALE on the X axis of [proportion] to the specified [SpankSection]
+ */
 fun SpankSection.scaleX(proportion: Float) {
     applySpan(
         ScaleXSpan(
@@ -127,6 +172,9 @@ fun SpankSection.scaleX(proportion: Float) {
     )
 }
 
+/**
+ * applies a SCALING with [proportion] on both axis to the specified [SpankSection]
+ */
 fun SpankSection.relativeSize(proportion: Float) {
     applySpan(
         RelativeSizeSpan(
@@ -135,6 +183,9 @@ fun SpankSection.relativeSize(proportion: Float) {
     )
 }
 
+/**
+ * applies the SCALING necessary to change the size to [pixels] to the specified [SpankSection]
+ */
 fun SpankSection.absoluteSize(pixels: Int) {
     applySpan(
         AbsoluteSizeSpan(
@@ -143,6 +194,9 @@ fun SpankSection.absoluteSize(pixels: Int) {
     )
 }
 
+/**
+ * applies the SCALING necessary to change the size to [dips] to the specified [SpankSection]
+ */
 fun SpankSection.absoluteSizeDP(dips: Int) {
     applySpan(
         AbsoluteSizeSpan(
@@ -151,6 +205,10 @@ fun SpankSection.absoluteSizeDP(dips: Int) {
     )
 }
 
+/**
+ * applies a CLICK LISTENER to the specified [SpankSection], when clicked executes the [block] with
+ * the part of the [SpankSection.content] from [SpankSection.start] to [SpankSection.end]
+ */
 fun SpankSection.clickable(block: (CharSequence) -> Unit) {
     applySpan(
         ClickableSpank(
@@ -159,6 +217,9 @@ fun SpankSection.clickable(block: (CharSequence) -> Unit) {
     )
 }
 
+/**
+ * internal construct used as a intermediate between the Android framework and the library
+ */
 private class ClickableSpank(
     val spanContent: CharSequence,
     val codeBlock: (CharSequence) -> Unit
@@ -168,6 +229,9 @@ private class ClickableSpank(
     }
 }
 
+/**
+ * adds an ANNOTATION to the specified [SpankSection] (No visual change, is just metadata)
+ */
 fun SpankSection.customAnnotation(key: String, value: String) {
     applySpan(
         Annotation(
@@ -176,6 +240,10 @@ fun SpankSection.customAnnotation(key: String, value: String) {
     )
 }
 
+/**
+ * replaces the specified [SpankSection] with the [drawable] aligned to [verticalAlignment],
+ * possible values are [DynamicDrawableSpan.ALIGN_BASELINE] or [DynamicDrawableSpan.ALIGN_BOTTOM]
+ */
 fun SpankSection.image(
     drawable: Drawable,
     sourceUri: String? = null,
@@ -190,6 +258,10 @@ fun SpankSection.image(
     )
 }
 
+/**
+ * replaces the specified [SpankSection] with the image from [resId] aligned to [verticalAlignment],
+ * possible values are [DynamicDrawableSpan.ALIGN_BASELINE] or [DynamicDrawableSpan.ALIGN_BOTTOM]
+ */
 fun SpankSection.imageResource(
     context: Context,
     @DrawableRes resId: Int,
@@ -209,6 +281,9 @@ fun SpankSection.imageResource(
 //*********************************************
 //*********************************************
 
+/**
+ * applies a QUOTE style to the [SpankParagraph] with [quoteColor], [stripeWidth] and [gapWidth]
+ */
 @RequiresApi(Build.VERSION_CODES.P)
 fun SpankParagraph.customQuote(
     @ColorInt quoteColor: Int = -0xffff01,
@@ -220,6 +295,9 @@ fun SpankParagraph.customQuote(
     )
 }
 
+/**
+ * applies a QUOTE style to the specified [SpankParagraph] with [quoteColor]
+ */
 fun SpankParagraph.quote(@ColorInt quoteColor: Int = -0xffff01) {
     applySpan(
         QuoteSpan(
@@ -228,6 +306,9 @@ fun SpankParagraph.quote(@ColorInt quoteColor: Int = -0xffff01) {
     )
 }
 
+/**
+ * aligns the specified [SpankParagraph] to [gravity]
+ */
 fun SpankParagraph.alignTo(@EzAlign gravity: Int) {
     applySpan(
         AlignmentSpan.Standard(
@@ -241,15 +322,21 @@ fun SpankParagraph.alignTo(@EzAlign gravity: Int) {
     )
 }
 
+/**
+ * aligns the specified [SpankParagraph] to [alignment]
+ */
 fun SpankParagraph.customAlignTo(alignment: AlignmentSpan) {
     applySpan(
         alignment
     )
 }
 
+/**
+ * applies a BULLET style to the specified [SpankParagraph] with [bulletColor] and [gapWidth]
+ */
 fun SpankParagraph.bullet(
     gapWidth: Int = BulletSpan.STANDARD_GAP_WIDTH,
-    @ColorInt bulletColor: Int = Color.TRANSPARENT
+    @ColorInt bulletColor: Int = Color.BLACK
 ) {
     applySpan(
         BulletSpan(
@@ -258,6 +345,9 @@ fun SpankParagraph.bullet(
     )
 }
 
+/**
+ * adds the [drawable] with some [padding] the specified [SpankParagraph]
+ */
 fun SpankParagraph.drawableWithMargin(
     drawable: Drawable?,
     padding: Int = 0
@@ -271,6 +361,9 @@ fun SpankParagraph.drawableWithMargin(
     }
 }
 
+/**
+ * adds the [bitmap] with some [padding] the specified [SpankParagraph]
+ */
 fun SpankParagraph.bitmapWithMargin(
     bitmap: Bitmap,
     padding: Int = 0
@@ -282,6 +375,9 @@ fun SpankParagraph.bitmapWithMargin(
     )
 }
 
+/**
+ * adds some [padding] to the first [numberOfLines] on the specified [SpankParagraph]
+ */
 fun SpankParagraph.leadingMarginModifier(
     padding: Int,
     numberOfLines: Int
@@ -293,6 +389,9 @@ fun SpankParagraph.leadingMarginModifier(
     )
 }
 
+/**
+ * intermediate construct used by [leadingMarginModifier] to add [padding] on a [numberOfLines]
+ */
 private class CustomLeadingMarginSpan(
     private val padding: Int,
     private val numberOfLines: Int
@@ -323,6 +422,9 @@ private class CustomLeadingMarginSpan(
     }
 }
 
+/**
+ * applies a TAB STOP style with an [offset] to the specified [SpankParagraph]
+ */
 fun SpankParagraph.tabStop(offset: Int) {
     applySpan(
         TabStopSpan.Standard(
@@ -331,6 +433,9 @@ fun SpankParagraph.tabStop(offset: Int) {
     )
 }
 
+/**
+ * internal method to apply the [span] to the content, used by all the styles
+ */
 private fun SpankSection.applySpan(span: Any) {
     content.setSpan(span, start, end + 1, spanFlag)
 }
