@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" translatable="false">SpanEZ</string>
+
+    <!-- Span Ez Example -->
+    <string name="medium_post">
+        Spannables made easy\n\n
+        Jorge Aguilar\n
+        Jan 14, 2017 - 3 min read\n\n
+        Have you ever had to deal with Spans in Android?\n\n
+        If the answer is yes, i’m sure you then know all the hassles and boilerplate that you need to write in order to get them working. That is without taking into account the barely documented developer docs, i mean what’s up with that “Object what” argument.\n\n
+        I have been working on a library to lessen the burden of Spans, because i hate developers reinventing the wheel just to avoid having to deal with them. They are very useful and can decrease the complexity of your code by doing so. Believe me, i have seen multiple timesdevelopers splitting their strings into multiple resources, so that they can place them into multiple TextViews and then simply style the TextViews independently. This is not just an overkill of a solution, but, it also increases the size of your layout hierarchy and creates different problems on certain screen sizes.
+    </string>
+    <string name="yes">yes</string>
+    <string name="then_you_know">you then know all the hassles and boilerplate that you need to write in order to get them working.</string>
+    <string name="working_on_library">I have been working on a library to lessen the burden of Spans</string>
+
+    <string name="example_title">Kotlin Example</string>
+    <string name="span_toggle_button">Toggle</string>
+</resources>
