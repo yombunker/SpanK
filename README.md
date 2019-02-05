@@ -8,6 +8,7 @@ There are 3 steps to start using this library:
 2. decide which locator(s) fits your needs
    * (optional) you can pass down a flag to override the default spanFlag for all styles on this locator
 3. pass down styles to each locator
+   * If using link or clickable you need to set movement method on your view `your_text_view.movementMethod = LinkMovementMethod()`
 
 
 # Step 1 - Get the ball rolling
