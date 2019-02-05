@@ -35,7 +35,7 @@ class KotlinMainActivity : AppCompatActivity() {
                 link("https://medium.com/@jorgecool/spannables-made-easy-e7ce634723c5")
             }
 
-            paragraphRange(1, 2) {
+            paragraphRange(1 to 2) {
                 absoluteSizeDP(10)
                 drawableWithMargin(
                     ContextCompat.getDrawable(

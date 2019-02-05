@@ -63,6 +63,12 @@ inline fun SpankBuilder.range(
     SpankSection(content, start, end, spanFlag).block()
 }
 
+inline fun SpankBuilder.range(
+    range: Pair<Int, Int>,
+    @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
+    block: SpankSection.() -> Unit
+) = range(range.first, range.second, spanFlag, block)
+
 /**
  * Applies the styles on [block] to the whole content
  */
@@ -270,3 +276,9 @@ inline fun SpankBuilder.paragraphRange(
         spanFlag
     ).block()
 }
+
+inline fun SpankBuilder.paragraphRange(
+    range: Pair<Int, Int>,
+    @EzFlags spanFlag: Int = EzFlags.EXCLUSIVE_EXCLUSIVE,
+    block: SpankParagraph.() -> Unit
+) = paragraphRange(range.first, range.second, spanFlag, block)
