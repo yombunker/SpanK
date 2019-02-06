@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/yombunker/maven/SpanK/images/download.svg) ](https://bintray.com/yombunker/maven/SpanK/_latestVersion)
+
 # SpanK
 Spans for Kotlin made easier, plain and simple.
 

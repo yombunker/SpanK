@@ -26,3 +26,14 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    userOrg = 'yombunker'
+    repoName = 'maven'
+    groupId = 'com.bunk3r'
+    artifactId = 'SpanK'
+    publishVersion = '1.0.0'
+    desc = 'First realease of Spannables on Kotlin'
+    website = 'https://github.com/yombunker/SpanK'
+}
