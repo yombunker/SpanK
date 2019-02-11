@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1.0"
     }
 
     compileOptions {
@@ -33,7 +33,7 @@ publish {
     repoName = 'maven'
     groupId = 'com.bunk3r'
     artifactId = 'SpanK'
-    publishVersion = '1.0.0'
-    desc = 'First realease of Spannables on Kotlin'
+    publishVersion = '1.1.0'
+    desc = 'Spans on Kotlin made easy'
     website = 'https://github.com/yombunker/SpanK'
 }

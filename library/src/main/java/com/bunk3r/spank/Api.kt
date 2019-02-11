@@ -65,7 +65,7 @@ inline fun Context.styleString(
 inline fun Context.styleStringWithTokens(
     content: String,
     openingTokenFormat: String,
-    closingTokenFormat: String,
+    closingTokenFormat: String = openingTokenFormat,
     block: SpankBuilderWithTokenSupport.() -> Unit
 ): Spanned {
     val builder = SpankBuilderWithTokenSupport(
@@ -86,7 +86,7 @@ inline fun Context.styleStringWithTokens(
 inline fun Context.styleStringWithTokens(
     @StringRes resId: Int,
     openingTokenFormat: String,
-    closingTokenFormat: String,
+    closingTokenFormat: String = openingTokenFormat,
     block: SpankBuilderWithTokenSupport.() -> Unit
 ) = styleStringWithTokens(getString(resId), openingTokenFormat, closingTokenFormat, block)
 
