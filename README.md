@@ -3,6 +3,10 @@
 # SpanK
 Spans for Kotlin made easier, plain and simple.
 
+![Without spans, look at it, looks so sad :(](./examples/without_spans.png)
+![With spans, everything is better](./examples/with_spans.png)
+![You can create your own in app ToS with this](./examples/tos_with_spans.png)
+
 # How to use
 There are 3 steps to start using this library:
 1. you need to call the styleString method
