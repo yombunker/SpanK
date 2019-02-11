@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.bunk3r.spanez.sample.KotlinMainActivity">
+    tools:context="com.bunk3r.spanez.sample.SpankActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/page_title"

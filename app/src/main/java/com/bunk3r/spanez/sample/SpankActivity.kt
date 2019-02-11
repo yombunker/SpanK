@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.bunk3r.spank.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class KotlinMainActivity : AppCompatActivity() {
+class SpankActivity : AppCompatActivity() {
 
     var spanIsSet = false
     private lateinit var spannedContent: Spanned

@@ -13,10 +13,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".KotlinMainActivity" />
+        <activity android:name=".SpankActivity" />
+        <activity android:name=".SpankWithTokensActivity" />
+        <activity
+            android:name=".SpankTosActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity-alias
             android:name=".Launcher"
-            android:targetActivity=".KotlinMainActivity">
+            android:targetActivity=".SpankTosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

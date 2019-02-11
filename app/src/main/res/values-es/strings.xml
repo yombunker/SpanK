@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- SpanK Example -->
     <string name="medium_post">
         Spannables simplificados\n\n
         Jorge Aguilar\n
@@ -14,4 +16,14 @@
 
     <string name="example_title">Ejemplo en Kotlin</string>
     <string name="span_toggle_button">Alternar</string>
+
+    <!-- SpanK with tokens Example -->
+    <string name="medium_post_with_tokens">
+        Spannables simplificados\n\n
+        Jorge Aguilar\n
+        14 Ene, 2017 - Lectura 3 min\n\n
+        Alguna vez haz tenido que lidear con Spans en Android?\n\n
+        Si la respuesta es {\\yes}si{yes/}, {\\problem}entonces estoy seguro que conoces todos los proplemas y el codigo repetitivo que tienes que escribir para conseguir que funcionen.{problem/} Eso es sin tener en cuenta la falta de documentacion, digo, que es lo que pasa con ese argumento llamado "what".\n\n
+        {\\reveal}He estado trabajando en una libreria para reducir la carga que conlleva trabajar con Spans{reveal/}, ya que odio que los programadores tengan que reinventar la rueda solo para evitar tener que trabajar con ellos. Son muy utiles y pueden reducir la complejidad de tu codigo al usarlos. Creeme he visto a mucho desarrolladores dividir sus cadenas de caracteres en multiples recursos, para así poder ponerlos en TextViews separados. Esto no es solo un poco exagerado, sino que también incrementa el tamano de el diseno y genera ciertos problemas en ciertos tamanaos de pantalla y/o lenguages.
+    </string>
 </resources>

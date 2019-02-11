@@ -9,6 +9,7 @@ import android.os.Build
 import android.text.Annotation
 import android.text.Layout
 import android.text.Spannable
+import android.text.TextPaint
 import android.text.style.*
 import android.view.View
 import androidx.annotation.ColorInt
@@ -154,20 +155,29 @@ fun SpankSection.absoluteSizeDP(dips: Int) = applySpan(
  * applies a CLICK LISTENER to the specified [SpankSection], when clicked executes the [block] with
  * the part of the [SpankSection.content] from [SpankSection.start] to [SpankSection.end]
  */
-fun SpankSection.clickable(block: (CharSequence) -> Unit) = applySpan(
-    ClickableSpank(
-        content.subSequence(start, end + 1),
-        block
+fun SpankSection.clickable(showUnderline: Boolean = true, block: (CharSequence) -> Unit) =
+    applySpan(
+        ClickableSpank(
+            content.subSequence(start, end + 1),
+            showUnderline,
+            block
+        )
     )
-)
 
 /**
  * internal construct used as a intermediate between the Android framework and the library
  */
 private class ClickableSpank(
     val spanContent: CharSequence,
+    val showUnderline: Boolean,
     val codeBlock: (CharSequence) -> Unit
 ) : ClickableSpan() {
+    override fun updateDrawState(ds: TextPaint) {
+        if (showUnderline) {
+            super.updateDrawState(ds)
+        }
+    }
+
     override fun onClick(widget: View) = codeBlock(spanContent)
 }
 

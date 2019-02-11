@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name" translatable="false">SpanEZ</string>
+    <string name="app_name" translatable="false">SpanK</string>
 
-    <!-- Span Ez Example -->
+    <!-- SpanK Example -->
     <string name="medium_post">
         Spannables made easy\n\n
         Jorge Aguilar\n
@@ -16,4 +16,26 @@
 
     <string name="example_title">Kotlin Example</string>
     <string name="span_toggle_button">Toggle</string>
+
+    <!-- SpanK with tokens Example -->
+    <string name="medium_post_with_tokens">
+        Spannables made easy\n\n
+        Jorge Aguilar\n
+        Jan 14, 2017 - 3 min read\n\n
+        Have you ever had to deal with Spans in Android?\n\n
+        If the answer is {\\yes}yes{yes/}, i’m sure {\\problem}you then know all the hassles and boilerplate that you need to write in order to get them working.{problem/} That is without taking into account the barely documented developer docs, i mean what’s up with that “Object what” argument.\n\n
+        {\\reveal}I have been working on a library to lessen the burden of Spans{reveal/}, because i hate developers reinventing the wheel just to avoid having to deal with them. They are very useful and can decrease the complexity of your code by doing so. Believe me, i have seen multiple timesdevelopers splitting their strings into multiple resources, so that they can place them into multiple TextViews and then simply style the TextViews independently. This is not just an overkill of a solution, but, it also increases the size of your layout hierarchy and creates different problems on certain screen sizes.
+    </string>
+
+    <!-- Terms of Service Example -->
+    <string name="google_music_terms_of_service" translatable="false">
+        Bring your music along\n\n
+        Add up to 50,000 songs from your computer for free and stream them anywhere.\n\n
+        SUBSCRIBE\n\n
+        OTHER PLANS\n\n
+        By signing up, you agree to the Play Terms of Service.{\\copy}©{copy/}
+    </string>
+
+    <string name="tos_link" translatable="false">Play Terms of Service</string>
+
 </resources>
